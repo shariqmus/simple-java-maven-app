@@ -15,19 +15,18 @@ phases:
       - echo post_build started on `date`
       - mvn test
 
+artifacts:
+  files:
+    - target/my-app-1.0-SNAPSHOT.jar
+  discard-paths: yes
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
+
 reports:
   codebuild-demo-report-group:
     files:
       - "*.xml"
     base-directory: 'target/surefire-reports'
     discard-paths: no
-
-artifacts:
-  files:
-    - target/my-app-1.0-SNAPSHOT.jar
-  discard-paths: yes
-
-
-cache:
-  paths:
-    - '/root/.m2/**/*'

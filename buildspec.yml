@@ -16,7 +16,7 @@ phases:
       - mvn test
 
 reports:
-  arn:aws:codebuild:ap-southeast-1:522614987397:report-group/codebuild-demo-report-group:
+  codebuild-demo-report-group:
     files:
       - "*.xml"
     base-directory: 'target/surefire-reports'

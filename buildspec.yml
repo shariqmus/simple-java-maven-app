@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: openjdk8
+    #commands:
+      #- apt-get install tree -y
+  build:
+    commands:
+      - echo build started on `date`
+      - mvn -B -DskipTests -T100 clean package
+  post_build:
+    commands:
+      - echo post_build started on `date`
+      - mvn test
+
+reports:
+  arn:aws:codebuild:ap-southeast-1:522614987397:report-group/codebuild-demo-report-group:
+    files:
+      - "*.xml"
+    base-directory: 'target/surefire-reports'
+    discard-paths: no
+
+artifacts:
+  files:
+    - target/my-app-1.0-SNAPSHOT.jar
+  discard-paths: yes
+
+
+cache:
+  paths:
+    - '/root/.m2/**/*'
